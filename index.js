@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3500;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+//routes
 app.use('/api/register' , require('./routes/api/registerRoute'));
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
