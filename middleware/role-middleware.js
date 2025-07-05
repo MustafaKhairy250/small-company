@@ -1,16 +1,20 @@
-import { PrismaClient } from "@prisma/client";
+const PrismaClient = require("@prisma/client").PrismaClient;
 const prisma = new PrismaClient();
 
 async function checkRole(req, res, next) {
-    const { role } = prisma.users.findUnique({
+   try {
+    const user = await prisma.users.findUnique({
       where: {
-        role: req.user,
+        id : req.user.id
       },
     });
-    if (role !== 'ADMIN') {
+    if (user.role !== 'ADMIN') {
       return res.status(403).json({ error: 'You do not have permission to perform this action' });
     }
     next();
+   } catch (err) {
+    res.status(500).json({ error: err.message });
+   }
   }
     
-  export { checkRole };
+  module.exports = checkRole ;
