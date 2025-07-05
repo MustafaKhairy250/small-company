@@ -9,6 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //routes
-app.use('/api/register' , require('./routes/api/registerRoute'));
+app.use('/api/register' , require('./routes/api/registerRoute')); //register route
+app.use('/api/login' , require('./routes/api/loginRoute')); //login route
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import bcrypt from 'bcrypt';
 export async function register (req, res) {
-    const { name, email, password , role , position} = req.body;
+    const { name, email, password ,passwordConfirmation, role , position} = req.body;
     try {
         const hashed = await bcrypt.hash(password, 10);
         const user = await prisma.users.create({
